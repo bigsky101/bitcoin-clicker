@@ -120,7 +120,7 @@ var Game = {}
 // Every constant variable is saved here
 Game.GameConst = {
   "priceMultiplier": 1.05,
-  "VERSION": "1.4.5"
+  "VERSION": "1.4.6"
 }
 
 Game.units = [
@@ -437,11 +437,11 @@ $(document).ready(function () {
 
   $(window).on('mouseout', function() {
       cursorInPage = false;
-      $("#overlay").show();
+      $("body").removeClass("active");
   });
   $(window).on('mouseover', function() {
       cursorInPage = true;
-      $("#overlay").removeAttr("style").hide();
+      $("body").addClass("active");
   });
 
   // Write the version into the .version span element

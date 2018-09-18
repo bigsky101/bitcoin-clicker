@@ -108,9 +108,13 @@ body{
     margin: 0 auto;
     top: 25%;
     transition: width 0.2s ease-in-out, top 0.2s ease-in-out;
-    animation: rotation 20s linear infinite;
     border-radius: 500px;
 }
+
+body.active .bitcoin {
+    animation: rotation 20s linear infinite;
+}
+
 .bitcoin:hover{
     width: 27%;
     top: 23%;
@@ -188,10 +192,13 @@ body{
     text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
 }
 
-
 #overlay {
+    display: none;
+}
+
+body.active #overlay {
     position: fixed; /* Sit on top of the page content */
-    display: none; /* Hidden by default */
+    display: block; /* Hidden by default */
     width: 100%; /* Full width (cover the whole page) */
     height: 100%; /* Full height (cover the whole page) */
     top: 0; 
