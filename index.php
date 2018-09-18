@@ -137,5 +137,6 @@
     </div>
     <script src="lib/jquery-3.3.1.min.js"></script>
     <script async src="scripts/app.js" type="text/javascript"></script>
+    <div id="overlay" class="overlay"></div>
 </body>
 </html>

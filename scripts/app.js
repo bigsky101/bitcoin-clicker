@@ -437,9 +437,11 @@ $(document).ready(function () {
 
   $(window).on('mouseout', function() {
       cursorInPage = false;
+      $("#overlay").show();
   });
   $(window).on('mouseover', function() {
       cursorInPage = true;
+      $("#overlay").removeAttr("style").hide();
   });
 
   // Write the version into the .version span element
