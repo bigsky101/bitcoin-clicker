@@ -173,6 +173,12 @@ body.active .bitcoin {
     padding-left: 10px;
     background: linear-gradient(#ffe09f, #ffb84c);
 }
+
+.purchaseItem.inactive {
+    pointer-events: none;
+    opacity: .25;
+}
+
 .purchaseItem:hover{
     background: linear-gradient(90deg, #ffe09f, #ffb84c);
     cursor: pointer;

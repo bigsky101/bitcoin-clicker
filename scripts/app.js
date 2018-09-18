@@ -103,6 +103,31 @@ if(localStorage.getItem("bitcoins") === null){
 
   let satoshis = bitcoins * 100000000;
 
+  setActive();
+
+}
+
+function setActive(){
+  // $(".purchaseItem").removeClass('inactive');
+
+  $(".purchaseItem").each(function(){
+
+    // id of the item
+    var id = $(this).attr("id");
+
+    // The price attribute as a float number
+    var price = parseFloat($(this).attr("data-price"));
+
+    // If you have enough Bitcoins, it´ll buy one item
+    if(parseFloat(bitcoins.toFixed(8)) >= price){
+      $(this).removeClass('inactive');
+    }else{
+      $(this).addClass('inactive');
+    }
+
+  });
+
+
 }
 
 /**
@@ -120,7 +145,7 @@ var Game = {}
 // Every constant variable is saved here
 Game.GameConst = {
   "priceMultiplier": 1.05,
-  "VERSION": "1.4.9"
+  "VERSION": "1.5.0"
 }
 
 Game.units = [
@@ -244,9 +269,9 @@ Game.setBitcoinPerSecondRateAtBeginning = function () {
       bitcoinRate = bitcoinRate + (itemAmount * bits_per_sec)
 
       // Logging the calculation in the console
-      console.log("i = " + i + " | B/sec before: " + before.toFixed(8) +
-        " - Calculation made: " + before.toFixed(8) + " + (" + itemAmount + " * " + bits_per_sec + ") = " +  bitcoinRate.toFixed(8) +
-        " | New B/sec at " + bitcoinRate.toFixed(8))
+      // console.log("i = " + i + " | B/sec before: " + before.toFixed(8) +
+      //   " - Calculation made: " + before.toFixed(8) + " + (" + itemAmount + " * " + bits_per_sec + ") = " +  bitcoinRate.toFixed(8) +
+      //   " | New B/sec at " + bitcoinRate.toFixed(8))
     }
   }
 
@@ -263,7 +288,7 @@ Game.setBitcoinPerSecondRateAtBeginning = function () {
 Game.setNewBitcoinRate = function (rate) {
 
   // Logging the new Bitcoin per second rate
-  console.log("setNewBitcoinRate -> New rate: " + (bitcoinRate + rate).toFixed(8) )
+  // console.log("setNewBitcoinRate -> New rate: " + (bitcoinRate + rate).toFixed(8) )
 
   // Showing the new rate on the page
   // Rounding at specific values
@@ -329,6 +354,8 @@ Game.setNewPrice = function()
  */
 Game.bSecFunction = function (rate) {
 
+  setActive();
+
   // Pause when mouse outside window
   if (cursorInPage !== true) {
       // console.log('Game Paused');
@@ -368,14 +395,15 @@ Game.bSecFunction = function (rate) {
   localStorage.setItem("bitcoins", "" + bitcoins + "")
 
   // console.log("bSec -> B/sec at " + rate.toFixed(8))
-
+  setActive();
 }
 
 /**
  * Stops the B/sec interval.
  */
 Game.stopBsec = function () {
-  clearInterval(bSec)
+  clearInterval(bSec);
+  setActive();
 }
 
 /**
@@ -411,7 +439,8 @@ Game.resetGame = function () {
   Game.stopBsec()
   localStorage.setItem("bitcoins", "0")
   localStorage.clear()
-  location.reload()
+  location.reload();
+  setActive();
 }
 
 // --------------------------------------------------- //
@@ -487,6 +516,8 @@ $(document).ready(function () {
 
     // Save the new amount of Bitcoins in the localStorage storage
     localStorage.setItem("bitcoins", "" + bitcoins + "")
+
+    setActive();
 
   });
 
@@ -573,10 +604,8 @@ $(document).ready(function () {
   //
   // If the reset button was pressed, do following thing
   $(".resetButton").click(function () {
-    Game.resetGame()
+    Game.resetGame();
   })
 
 });
-
-
 
