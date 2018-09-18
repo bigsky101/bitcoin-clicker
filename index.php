@@ -137,6 +137,10 @@
     </div>
     <script src="lib/jquery-3.3.1.min.js"></script>
     <script async src="scripts/app.js" type="text/javascript"></script>
-    <div id="overlay" class="overlay"></div>
+    <div id="overlay" class="overlay">
+        <div class="Aligner">
+          <div class="Aligner-item">Game Paused</div>
+        </div>
+    </div>
 </body>
 </html>
