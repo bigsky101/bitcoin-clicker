@@ -119,8 +119,8 @@ var Game = {}
 
 // Every constant variable is saved here
 Game.GameConst = {
-  "priceMultiplier": 1.15,
-  "VERSION": "1.4.0"
+  "priceMultiplier": 1.05,
+  "VERSION": "1.4.1"
 }
 
 Game.units = [
@@ -329,6 +329,11 @@ Game.setNewPrice = function()
  */
 Game.bSecFunction = function (rate) {
 
+  // Pause when mouse outside window
+  if (cursorInPage !== true) {
+      console.log('Game Paused');
+  }
+
   bitcoins = bitcoins + rate
 
   // Show both values on the page
@@ -361,7 +366,7 @@ Game.bSecFunction = function (rate) {
   // Save bitcoin amount in the storage
   localStorage.setItem("bitcoins", "" + bitcoins + "")
 
-  console.log("bSec -> B/sec at " + rate.toFixed(8))
+  // console.log("bSec -> B/sec at " + rate.toFixed(8))
 
 }
 
@@ -423,9 +428,18 @@ bSec = setInterval(function () {
   Game.bSecFunction(bitcoinRate);
 }, 1000)
 
+// Pause on mouse exit
+var cursorInPage = false;
 
 // Doing everything here when the game is ready to be used.
 $(document).ready(function () {
+
+  $(window).on('mouseout', function() {
+      cursorInPage = false;
+  });
+  $(window).on('mouseover', function() {
+      cursorInPage = true;
+  });
 
   // Write the version into the .version span element
   $(".version").text("Version " + Game.GameConst.VERSION)
