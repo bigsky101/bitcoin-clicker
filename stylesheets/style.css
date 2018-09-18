@@ -109,10 +109,12 @@ body{
     top: 25%;
     transition: width 0.2s ease-in-out, top 0.2s ease-in-out;
     border-radius: 500px;
+    animation: rotation 20s linear infinite;
+    animation-play-state: paused;
 }
 
 body.active .bitcoin {
-    animation: rotation 20s linear infinite;
+    animation-play-state: running;
 }
 
 .bitcoin:hover{
@@ -220,6 +222,7 @@ body.active #overlay {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100%;
 }
 
 .Aligner-item {
