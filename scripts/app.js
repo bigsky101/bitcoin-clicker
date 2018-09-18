@@ -120,7 +120,7 @@ var Game = {}
 // Every constant variable is saved here
 Game.GameConst = {
   "priceMultiplier": 1.05,
-  "VERSION": "1.4.1"
+  "VERSION": "1.4.2"
 }
 
 Game.units = [
@@ -331,7 +331,8 @@ Game.bSecFunction = function (rate) {
 
   // Pause when mouse outside window
   if (cursorInPage !== true) {
-      console.log('Game Paused');
+      // console.log('Game Paused');
+      return;
   }
 
   bitcoins = bitcoins + rate

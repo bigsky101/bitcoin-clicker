@@ -38,7 +38,7 @@
             <h1 class="bitcoinAmountDisplay"><span class="bitcoinAmount">0</span> Bitcoins</h1>
             <p class="satoshiAmountDisplay"><span class="satoshiAmount">0</span> Satoshi</p>
             <p class="bSecRate"><span class="bSecRateNumber">0</span> Bitcoins/sec</p>
-            <img class="bitcoin" src="images/bitcoin-8bit.png">
+            <img class="bitcoin" src="images/bitcoin.png">
         </div>
         <div class="rightContainer buyItemContainer">
             <ul class="purchaseList">
