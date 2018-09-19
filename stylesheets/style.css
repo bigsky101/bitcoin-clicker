@@ -75,6 +75,10 @@ body{
     overflow-x: hidden;
 }
 
+ul.recordList {
+    border: 4px solid white;
+}
+
 .bitcoinAmountDisplay{
     text-align: center;
     font-family: VCR OSD Mono, cursive;
@@ -195,10 +199,10 @@ body.active .bitcoin {
 
 /* Item list item */
 .recordItem{
-    width: 99%;
+    /*width: 99%;*/
     border-top: 3px solid white;
     border-bottom: 3px solid white;
-    border-right: 3px solid white;
+    /*border-right: 3px solid white;*/
     padding-left: 10px;
     background: linear-gradient(#ffe09f, #ffb84c);
 }
@@ -243,7 +247,7 @@ body.active .bitcoin {
 
 .purchaseItem.inactive {
     pointer-events: none;
-    opacity: .25;
+    opacity: .75;
 }
 
 .purchaseItem:hover{
