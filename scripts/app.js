@@ -95,7 +95,7 @@ var items = [
  *
  */
 
-
+var bSecInterval = null
 
 // Game variable which will contain any needed major function or needed variables for the game.
 var Game = {}
@@ -399,7 +399,7 @@ Game.bSecFunction = function (rate) {
  * Stops the B/sec interval.
  */
 Game.stopBsec = function () {
-  clearInterval(bSec);
+  clearInterval(bSecInterval);
   setActive();
 }
 
@@ -459,7 +459,8 @@ Game.resetGame = function () {
 Game.setBitcoinPerSecondRateAtBeginning()
 
 // Stating the interval with the calculated Bitcoin/second rate.
-bSec = setInterval(function () {
+clearInterval(bSecInterval);
+bSecInterval = setInterval(function () {
   Game.bSecFunction(bitcoinRate);
 }, 1000)
 
@@ -730,7 +731,8 @@ $(document).ready(function () {
       var newRate = Game.setNewBitcoinRate(bitcoinsPerSecond)
 
       // Restarting the interval with the new rate
-      bSec = setInterval(function () {
+      clearInterval(bSecInterval);
+      bSecInterval = setInterval(function () {
         Game.bSecFunction(newRate);
       }, 1000)
 
@@ -746,7 +748,22 @@ $(document).ready(function () {
 
 });
 
+
+var startTime = new Date();
+
 function countTimer() {
+
+  endTime = new Date();
+
+  var timeDiff = endTime - startTime; //in ms
+  // timeDiff /= 1000;
+
+  startTime = new Date();
+
+  if(timeDiff <= 990){
+     return;
+  }
+
    ++totalSeconds;
    var hour = Math.floor(totalSeconds /3600).toString().padStart(2, '0');
    var minute = Math.floor((totalSeconds - hour*3600)/60).toString().padStart(2, '0');
