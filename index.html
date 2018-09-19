@@ -28,10 +28,36 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 </head>
-<body>
+<body class="active">
     <div class="gameFullContent">
         <div class="leftContainer">
             <span class="version"></span>
+            <ul class="recordList">
+                <li class="recordItem">
+                    <p class="itemHeadline">Fastest Time to Trillion Bitcoins</p>
+                    <p>00:00:00</p>
+                </li>
+                <li class="recordItem">
+                    <p class="itemHeadline">Fastest Time to Billion Bitcoins/sec</p>
+                    <p>00:00:00</p>
+                </li>
+                <li class="recordItem">
+                    <p class="itemHeadline">Highest Bitcoin Balance</p>
+                    <p><span id="highestGame">0</span> Bitcoins</p>
+                </li>
+                <li class="recordItem">
+                    <p class="itemHeadline">Highest Bitcoins/sec</p>
+                    <p>0 Bitcoins/sec</p>
+                </li>
+                <li class="recordItem">
+                    <p class="itemHeadline">Longest Game</p>
+                    <p id="longestGame">00:00:00</p>
+                </li>
+                <li class="recordItem">
+                    <p class="itemHeadline">Most Clicks</p>
+                    <p ><span id="mostClicks">0</span> Clicks</p>
+                </li>
+            </ul>
             <button class="resetButton">Reset everything</button>
         </div>
         <div class="mainGameContent">
@@ -39,6 +65,10 @@
             <p class="satoshiAmountDisplay"><span class="satoshiAmount">0</span> Satoshi</p>
             <p class="bSecRate"><span class="bSecRateNumber">0</span> Bitcoins/sec</p>
             <div class="bitcoin"><img src="images/bitcoin.png"></div>
+            <h2 class="bitcoinTimeDisplay">
+                <span>Time:</span>
+                <span class="gameTime" id="timer">00:00:00</span>
+            </h2>
         </div>
         <div class="rightContainer buyItemContainer">
             <ul class="purchaseList">

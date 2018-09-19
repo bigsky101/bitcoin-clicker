@@ -1,5 +1,16 @@
 var bitcoins = 0
 var bitcoinRate = 0
+var totalSeconds = 0;
+
+var longestGame = 0;
+
+var records = {};
+
+var click = 0;
+// records.longestGame = 0;
+// console.log(records);
+
+// localStorage.setItem("totalSeconds", "0");
 
 // Every item in the game
 // TODO: items should be part of the Game variable
@@ -90,13 +101,55 @@ if(localStorage.getItem("bitcoins") === null){
   // Set the localStorage Item for the first time
   localStorage.setItem("bitcoins", "0");
 
+  if(localStorage.getItem("totalSeconds") === null){
+    localStorage.setItem("totalSeconds", "0");
+    totalSeconds = 0;
+  }
+
   // Write the current amount of Bitcoins on the page
-  $(".bitcoinAmount").text(bitcoins.toFixed(8))
+  $(".bitcoinAmount").text(bitcoins.toFixed(8));
+
+  // totalSeconds = 0;
+
+  countTimer();
 
 }else{
-
   // Get the amount of Bitcoins and parse them to a float number
-  bitcoins = parseFloat(localStorage.getItem("bitcoins"))
+  bitcoins = parseFloat(localStorage.getItem("bitcoins"));
+  // totalSeconds = localStorage.getItem("totalSeconds");
+
+  if(localStorage.getItem("totalSeconds") === null || isNaN(localStorage.getItem("totalSeconds")) ){
+    localStorage.setItem("totalSeconds", "0");
+    totalSeconds = 0;
+  }else{
+    totalSeconds = parseInt(localStorage.getItem("totalSeconds"));
+  }
+
+  var hour = Math.floor(totalSeconds /3600).toString().padStart(2, '0');
+  var minute = Math.floor((totalSeconds - hour*3600)/60).toString().padStart(2, '0');
+  var seconds = (totalSeconds - (hour*3600 + minute*60)).toString().padStart(2, '0');
+
+  document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
+
+  if(localStorage.getItem("records") !== null){
+    records = JSON.parse(localStorage.getItem("records"));
+  }
+
+  longestGame = records.longestGame;
+
+  var hour = Math.floor(longestGame /3600).toString().padStart(2, '0');
+  var minute = Math.floor((longestGame - hour*3600)/60).toString().padStart(2, '0');
+  var seconds = (longestGame - (hour*3600 + minute*60)).toString().padStart(2, '0');
+
+  document.getElementById("longestGame").innerHTML = hour + ":" + minute + ":" + seconds;
+
+  highestGame = records.highestGame;
+
+  document.getElementById("highestGame").innerHTML = highestGame;
+
+  mostClicks = records.mostClicks;
+
+  document.getElementById("mostClicks").innerHTML = mostClicks;
 
   $(".bitcoinAmount").text("loading...")
   $(".satoshiAmount").text("loading...")
@@ -104,6 +157,8 @@ if(localStorage.getItem("bitcoins") === null){
   let satoshis = bitcoins * 100000000;
 
   setActive();
+
+  console.log(localStorage);
 
 }
 
@@ -145,7 +200,7 @@ var Game = {}
 // Every constant variable is saved here
 Game.GameConst = {
   "priceMultiplier": 1.05,
-  "VERSION": "1.5.2"
+  "VERSION": "1.6.1"
 }
 
 Game.units = [
@@ -362,6 +417,8 @@ Game.bSecFunction = function (rate) {
       return;
   }
 
+  countTimer();
+
   bitcoins = bitcoins + rate
 
   // Show both values on the page
@@ -396,6 +453,15 @@ Game.bSecFunction = function (rate) {
 
   // console.log("bSec -> B/sec at " + rate.toFixed(8))
   setActive();
+
+  if( records.highestGame === undefined || records.highestGame === null || parseFloat(bitcoins.toFixed(8)) >= parseFloat(records.highestGame.toFixed(8)) ){
+    records.highestGame = bitcoins;
+    console.log(records);
+
+    localStorage.setItem("records", JSON.stringify(records));
+
+    document.getElementById("highestGame").innerHTML = parseFloat(bitcoins.toFixed(8));
+  }
 }
 
 /**
@@ -437,8 +503,16 @@ String.prototype.optimizeNumber = Game.optimizeNumber
  */
 Game.resetGame = function () {
   Game.stopBsec()
-  localStorage.setItem("bitcoins", "0")
-  localStorage.clear()
+  localStorage.setItem("bitcoins", "0");
+  localStorage.setItem("totalSeconds", "0");
+  // items
+  items.forEach(function(element) {
+    // console.log(element.name);
+    localStorage.setItem(element.name, "0");
+  });
+
+  // localStorage.clear();
+  // localStorage.setItem("records", JSON.stringify(records));
   location.reload();
   setActive();
 }
@@ -459,7 +533,7 @@ bSec = setInterval(function () {
 }, 1000)
 
 // Pause on mouse exit
-var cursorInPage = false;
+var cursorInPage = true;
 
 // Doing everything here when the game is ready to be used.
 $(document).ready(function () {
@@ -488,6 +562,17 @@ $(document).ready(function () {
 
   // If clicked on the big Bitcoin
   $(".bitcoin").click(function () {
+
+    ++click;
+
+    if( records.mostClicks === undefined || records.mostClicks === null || records.mostClicks <= click ){
+      records.mostClicks = click;
+
+      localStorage.setItem("records", JSON.stringify(records));
+      localStorage.setItem("click", click);
+
+      document.getElementById("mostClicks").innerHTML = click;
+    }
 
     // Add 1^-8 Bitcoins (equal to 1 satoshi)
     bitcoins = bitcoins + 0.00000001
@@ -609,3 +694,29 @@ $(document).ready(function () {
 
 });
 
+function countTimer() {
+   ++totalSeconds;
+   var hour = Math.floor(totalSeconds /3600).toString().padStart(2, '0');
+   var minute = Math.floor((totalSeconds - hour*3600)/60).toString().padStart(2, '0');
+   var seconds = (totalSeconds - (hour*3600 + minute*60)).toString().padStart(2, '0');
+
+   document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
+
+   // localStorage.setItem("totalSeconds", "" + totalSeconds + "");
+
+   // console.log(records);
+
+   if( records.longestGame === undefined || records.longestGame === null || records.longestGame <= totalSeconds ){
+      records.longestGame = totalSeconds;
+
+      localStorage.setItem("records", JSON.stringify(records));
+      localStorage.setItem("totalSeconds", totalSeconds);
+
+      var hour = Math.floor(totalSeconds /3600).toString().padStart(2, '0');
+      var minute = Math.floor((totalSeconds - hour*3600)/60).toString().padStart(2, '0');
+      var seconds = (totalSeconds - (hour*3600 + minute*60)).toString().padStart(2, '0');
+
+      document.getElementById("longestGame").innerHTML = hour + ":" + minute + ":" + seconds;
+
+   }
+}

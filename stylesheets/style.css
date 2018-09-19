@@ -34,7 +34,7 @@ body{
 /* Left Container */
 /* just a placeholder atm */
 .leftContainer{
-    width: calc(100% * 0.25);
+    width: calc(100% * 0.22);
 }
 
 .version{
@@ -60,7 +60,9 @@ body{
 /* Main Container */
 /* THE BITCOIN IMAGE */
 .mainGameContent{
-    width: calc(100% * 0.5);
+    width: calc(100% * 0.55);
+    min-height: 90vh;
+    position: relative;
 }
 
 /* Right Container */
@@ -96,6 +98,18 @@ body{
     font-size: 25pt;
     color: white;
     text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black
+}
+.bitcoinTimeDisplay{
+    text-align: center;
+    font-family: VCR OSD Mono, cursive;
+    font-size: 45pt;
+    color: white;
+    text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
+    margin: 20px 0 0 0px;
+    bottom: 0px;
+    position: absolute;
+    width: 100%;
+    /*border: 4px solid green;*/
 }
 
 /* BITCOIN */
@@ -169,6 +183,24 @@ body.active .bitcoin {
     font-family: "VCR OSD Mono", cursive;
     margin: 0;
     padding: 0;
+}
+
+/* Item list */
+.recordList{
+    list-style-type: none;
+    font-family: "VCR OSD Mono", cursive;
+    margin: 0;
+    padding: 0;
+}
+
+/* Item list item */
+.recordItem{
+    width: 99%;
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
+    border-right: 3px solid white;
+    padding-left: 10px;
+    background: linear-gradient(#ffe09f, #ffb84c);
 }
 
 /* Optimization for smaller screens */
