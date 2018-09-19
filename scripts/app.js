@@ -158,7 +158,7 @@ if(localStorage.getItem("bitcoins") === null){
 
   setActive();
 
-  console.log(localStorage);
+  // console.log(localStorage);
 
 }
 
@@ -200,7 +200,7 @@ var Game = {}
 // Every constant variable is saved here
 Game.GameConst = {
   "priceMultiplier": 1.05,
-  "VERSION": "1.6.1"
+  "VERSION": "1.6.2"
 }
 
 Game.units = [
@@ -456,7 +456,7 @@ Game.bSecFunction = function (rate) {
 
   if( records.highestGame === undefined || records.highestGame === null || parseFloat(bitcoins.toFixed(8)) >= parseFloat(records.highestGame.toFixed(8)) ){
     records.highestGame = bitcoins;
-    console.log(records);
+    // console.log(records);
 
     localStorage.setItem("records", JSON.stringify(records));
 
