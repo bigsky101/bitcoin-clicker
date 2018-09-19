@@ -104,7 +104,7 @@ var Game = {}
 // Every constant variable is saved here
 Game.GameConst = {
   "priceMultiplier": 1.05,
-  "VERSION": "1.6.4"
+  "VERSION": "1.6.5"
 }
 
 Game.units = [
@@ -490,7 +490,12 @@ if(localStorage.getItem("bitcoins") === null){
     records = JSON.parse(localStorage.getItem("records"));
   }
 
-  longestGame = records.longestGame;
+  if(records.longestGame === null || isNaN(records.longestGame) ){
+    records.longestGame = 0;
+    longestGame = 0;
+  }else{
+    longestGame = records.longestGame;
+  }
 
   var hour = Math.floor(longestGame /3600).toString().padStart(2, '0');
   var minute = Math.floor((longestGame - hour*3600)/60).toString().padStart(2, '0');
@@ -498,15 +503,30 @@ if(localStorage.getItem("bitcoins") === null){
 
   document.getElementById("longestGame").innerHTML = hour + ":" + minute + ":" + seconds;
 
-  highestGame = records.highestGame;
+  if(records.highestGame === null || isNaN(records.highestGame) ){
+    records.highestGame = 0;
+    highestGame = 0;
+  }else{
+    highestGame = records.highestGame;
+  }
 
   document.getElementById("highestGame").innerHTML = displayBitcoins(highestGame);
 
-  mostClicks = records.mostClicks;
+  if(records.mostClicks === null || isNaN(records.mostClicks) ){
+    records.mostClicks = 0;
+    mostClicks = 0;
+  }else{
+    mostClicks = records.mostClicks;
+  }
 
   document.getElementById("mostClicks").innerHTML = mostClicks;
 
-  highestRate = records.highestRate;
+  if(records.highestRate === null || isNaN(records.highestRate) ){
+    records.highestRate = 0;
+    highestRate = 0;
+  }else{
+    highestRate = records.highestRate;
+  }
 
   document.getElementById("highestRate").innerHTML = displayBitcoins( highestRate );
 
