@@ -104,7 +104,7 @@ var Game = {}
 // Every constant variable is saved here
 Game.GameConst = {
   "priceMultiplier": 1.05,
-  "VERSION": "1.6.5"
+  "VERSION": "1.6.6"
 }
 
 Game.units = [
@@ -266,7 +266,20 @@ Game.setNewBitcoinRate = function (rate) {
 
     localStorage.setItem("records", JSON.stringify(records));
 
-    document.getElementById("highestRate").innerHTML = displayBitcoins( (bitcoinRate + rate) );
+    // 
+    if((bitcoinRate + rate) >= 1000000) {
+      // $(".bSecRateNumber").text((bitcoinRate + rate).toFixed(0).optimizeNumber())
+      document.getElementById("highestRate").innerHTML = ( (bitcoinRate + rate).toFixed(0).optimizeNumber() );
+    }else if((bitcoinRate + rate) >= 1000 ){
+      // $(".bSecRateNumber").text((bitcoinRate + rate).toFixed(0))
+      document.getElementById("highestRate").innerHTML = ( (bitcoinRate + rate).toFixed(0) );
+    }else if((bitcoinRate + rate) >= 1 ){
+      // $(".bSecRateNumber").text((bitcoinRate + rate).toFixed(2))
+      document.getElementById("highestRate").innerHTML = ( (bitcoinRate + rate).toFixed(2) );
+    }else{
+      // $(".bSecRateNumber").text((bitcoinRate + rate).toFixed(8))
+      document.getElementById("highestRate").innerHTML = ( (bitcoinRate + rate).toFixed(8) );
+    }
   }
 
   // Returning the new rate
