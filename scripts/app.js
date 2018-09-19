@@ -266,7 +266,6 @@ Game.setNewBitcoinRate = function (rate) {
 
     localStorage.setItem("records", JSON.stringify(records));
 
-    // 
     if((bitcoinRate + rate) >= 1000000) {
       // $(".bSecRateNumber").text((bitcoinRate + rate).toFixed(0).optimizeNumber())
       document.getElementById("highestRate").innerHTML = ( (bitcoinRate + rate).toFixed(0).optimizeNumber() );
@@ -381,11 +380,18 @@ Game.bSecFunction = function (rate) {
 
   if( records.highestGame === undefined || records.highestGame === null || parseFloat(bitcoins.toFixed(8)) >= parseFloat(records.highestGame.toFixed(8)) ){
     records.highestGame = bitcoins;
-    // console.log(records);
 
     localStorage.setItem("records", JSON.stringify(records));
 
-    document.getElementById("highestGame").innerHTML = displayBitcoins(bitcoins);
+    if( bitcoins >= 1000000 ) {
+      document.getElementById("highestGame").innerHTML = ( (bitcoins).toFixed(0).optimizeNumber() );
+    }else if( bitcoins >= 1000 ){
+      document.getElementById("highestGame").innerHTML = ( (bitcoins).toFixed(0) );
+    }else if( bitcoins >= 1 ){
+      document.getElementById("highestGame").innerHTML = ( (bitcoins).toFixed(2) );
+    }else{
+      document.getElementById("highestGame").innerHTML = ( (bitcoins).toFixed(8) );
+    }
   }
 }
 
