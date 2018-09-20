@@ -79,6 +79,14 @@ ul.recordList {
     border: 4px solid white;
 }
 
+.recordItem.nopadding {
+    padding: 0px !important;
+}
+
+.responsive {
+    max-width: 100%;
+}
+
 .bitcoinAmountDisplay{
     text-align: center;
     font-family: VCR OSD Mono, cursive;
@@ -282,11 +290,15 @@ body.active .bitcoin {
     bottom: 0;
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-    cursor: pointer; /* Add a pointer on hover */
+    /*cursor: pointer;*/ /* Add a pointer on hover */
+    transition: visibility .25s, opacity .25s linear;
+    visibility: visible;
+    opacity: 1;
 }
 
 body.active #overlay {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
 }
 
 .wrapper {
@@ -297,17 +309,19 @@ body.active #overlay {
 
 .Aligner {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100%;
 }
 
 .Aligner-item {
-  max-width: 50%;
+  max-width: 60%;
   font-size: 4rem;
   color: #FFF;
   font-family: VCR OSD Mono, cursive;
   text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
+  padding-bottom: 3rem;
 }
 
 .Aligner-item--top {
