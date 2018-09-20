@@ -111,6 +111,17 @@ ul.recordList {
     color: white;
     text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black
 }
+
+.widePlacement {
+    display: block;
+    width: 100%;
+    clear: both;
+}
+
+.widePlacement iframe.responsive {
+    margin: 0px auto;
+}
+
 .bitcoinTimeDisplay{
     text-align: center;
     font-family: VCR OSD Mono, cursive;
