@@ -103,8 +103,8 @@ var Game = {}
 
 // Every constant variable is saved here
 Game.GameConst = {
-  "priceMultiplier": 1.05,
-  "VERSION": "1.6.7"
+  "priceMultiplier": 1.15,
+  "VERSION": "2.0.1"
 }
 
 Game.units = [
@@ -591,6 +591,8 @@ var cursorInPage = true;
 
 // Doing everything here when the game is ready to be used.
 $(document).ready(function () {
+
+   $(document).foundation();
 
   $(window).on('mouseout', function() {
       cursorInPage = false;
