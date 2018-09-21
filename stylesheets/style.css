@@ -365,6 +365,24 @@ body.active #overlay {
         font-size: 1.8rem;
     }
 
+    .rightContainer{
+        /*width: calc(100% * 0.25);*/
+        border: 0px solid white;
+        max-height: none;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+
+    .wrapper div {
+      /*max-width: 60%;*/
+      font-size: 10vw;
+
+    }
+
+    .resetButton{
+        font-size: 1.0rem;
+    }
+
 
 }
 
